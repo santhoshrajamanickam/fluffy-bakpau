@@ -18,7 +18,8 @@ with open('DistinctCountry.srj') as json_file:
 
 for code in country_codes:
     r = requests.get("https://restcountries.eu/rest/v2/alpha/{}".format(code)).json()
-    name = r["name"].replace(" ", "_")
+    code = "https://UBI_project.org/"+code
+    name = "https://UBI_project.org/"+r["name"].replace(" ", "_")
     print("Code {} and name {}".format(code, name))
     graph.add((URIRef(name), RDF.type, SCHEMA.Place))
     graph.add((URIRef(code), RDF.type, FOAF.name))
