@@ -229,8 +229,3 @@ def add_instances(graph, place, project, sentences_tuple):
         for location in locations:
             for amount in money:
                 graph.add((project["place/" + location.replace(" ", "_")], project.associated_scheme, Literal(amount)))
-
-# content = "Starting in 2014, the Liberal Party of Canada,[119] the Green Party of Canada,[120] the Pirate Party of Canada,[121] provincial party Québec Solidaire,[122] and conservative senator Hugh Segal[123] have been advocating for basic income in Canada"
-# processed_sentences = extract_info(content)
-# place_annotations, people_annotations, organization_annotations = instance_linking(processed_sentences[0])
-# print('here')

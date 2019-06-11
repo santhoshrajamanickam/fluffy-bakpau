@@ -1,0 +1,25 @@
+# Experiment 3:
+
+PREFIX ubi: <https://UBI_project.org/>
+PREFIX ubi_graph: <https://UBI_project.org/UBI_graph/>
+PREFIX ubi_place: <https://UBI_project.org/UBI_graph/place/>
+PREFIX schema: <https://schema.org/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?vote (count(?vote) as ?count)
+FROM <https://krr.triply.cc/srm440/UBI/graphs/UBI_graph>
+{
+    ?user a ubi_graph:user.
+    ?user ubi_graph:from_country ?country_IRI .
+    ?country_IRI a ubi_graph:place .
+    ?country_IRI rdfs:label ?country .
+    ubi_place:Europe schema:containsPlace ?country_IRI.
+    ?country_IRI ubi_graph:associated_status ?status .
+    ?user ubi_graph:has_opinion _:opinion.
+    _:opinion ubi_graph:has_vote ?vote_IRI .
+    ?vote_IRI a ubi_graph:UBI_vote .
+    ?vote_IRI rdfs:Literal ?vote.
+    FILTER (?status = "not_supported" || ?status = "failed")
+
+} GROUP BY ?vote
